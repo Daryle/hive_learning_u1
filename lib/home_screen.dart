@@ -39,28 +39,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: box.length,
                 itemBuilder: (context, index){
                   Todo todo = box.getAt(index);
-                  return ListTile(
-                    title: Text(todo.title, style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: todo.isCompleted ? FontWeight.normal :FontWeight.bold,
-                      color: todo.isCompleted ? Colors.grey : Colors.black,
-                      decoration: todo.isCompleted? TextDecoration.lineThrough : TextDecoration.none,
-                    ),),
-                    leading: Checkbox(value: todo.isCompleted, onChanged: (value){
-                      Todo newTodo = Todo(
-                        title: todo.title,
-                        //exclamation to ensure its not null
-                        isCompleted: value!,
-                      );
-                      box.putAt(index, newTodo);
-                    } ,),
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete, color: Colors.grey,),
-                      onPressed: (){
-                        box.deleteAt(index);
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Task has been deleted successfully'),));
+                  return Card(
+                    
+                    child: ListTile(
 
-                      },
+                      title: Text(todo.title, style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: todo.isCompleted ? FontWeight.normal :FontWeight.bold,
+                        color: todo.isCompleted ? Colors.grey : Colors.black,
+                        decoration: todo.isCompleted? TextDecoration.lineThrough : TextDecoration.none,
+                      ),),
+                      leading: Checkbox(value: todo.isCompleted, onChanged: (value){
+                        Todo newTodo = Todo(
+                          title: todo.title,
+                          //exclamation to ensure its not null
+                          isCompleted: value!,
+                        );
+                        box.putAt(index, newTodo);
+                      } ,),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete, color: Colors.grey,),
+                        onPressed: (){
+                          box.deleteAt(index);
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Task has been deleted successfully'),));
+
+                        },
+                      ),
                     ),
                   );
                 });
